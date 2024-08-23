@@ -6,6 +6,6 @@
 
 ### Mã số sinh viên: 21017351
 
-[Link Github] [1]
+[Link Github][1]
 
 [1]: <https://github.com/Bao44>
