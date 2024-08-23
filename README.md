@@ -4,13 +4,9 @@
 
 ## GV: Nguyễn Trọng Tiến 
 
-### Tên sinh viên: Trương Quốc Bảo
-
-### Mã số sinh viên: 21017351
-
-### Thực hành thứ 6 tiết 1-3 (Nhóm 3)
-
-### Lớp học: DHKTPM17C
+|     Họ và Tên     |   MSSV   | Lớp học phần | Nhóm học phần  |
+|  ---------------  | -------- | ------------ | -------------  |
+|  Trương Quốc Bảo  | 21017351 |   DHKTPM17C  | Nhóm 3 T6_T1-3 |
 
 [Link Github][1]
 
