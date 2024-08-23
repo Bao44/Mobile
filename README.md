@@ -1,6 +1,6 @@
 # React Native
 
-## Moon: Lập trình thiết bị di động 
+## Môn học: Lập trình thiết bị di động 
 
 ## GV: Nguyễn Trọng Tiến 
 
