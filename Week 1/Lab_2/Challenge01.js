@@ -17,12 +17,19 @@ var markHeight = 1.69;
 var johnMass = 92;
 var johnHeight = 1.95;
 
+var markMass2 = 95;
+var markHeight2 = 1.88;
+
+var johnMass2 = 85;
+var johnHeight2 = 1.76;
+
 function calculateBMI_Version1(mass, height) {
     return mass / height ** 2;
 }
-var markHigherBMI_Version1 = calculateBMI_Version1(markMass, markHeight) > calculateBMI_Version1(johnMass, johnHeight);
+var markHigherBMI = calculateBMI_Version1(markMass, markHeight) > calculateBMI_Version1(johnMass, johnHeight);
+var markHigherBMI2 = calculateBMI_Version1(markMass2, markHeight2) > calculateBMI_Version1(johnMass2, johnHeight2);
 
-if(markHigherBMI_Version1) {
+if(markHigherBMI2) {
     console.log('Mark has a higher BMI than John.');
 } else {
     console.log('John has a higher BMI than Mark.');
