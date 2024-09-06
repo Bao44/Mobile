@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import FirstScreen from "./src/firstScreen";
+import Screen1_a from "./src/screen1_a";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <FirstScreen />
+      <Screen1_a />
       <StatusBar style="auto" />
     </View>
   );
