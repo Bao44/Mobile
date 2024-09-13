@@ -13,6 +13,10 @@ import EndScreen from "./src/endScreen";
 import Screen2_b from "./src/screen2_b";
 import Tiki_Ok from "./src/tiki_Ok";
 import { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
@@ -24,6 +28,14 @@ export default function App() {
       <Tiki_Ok/>
       <StatusBar style="auto" />
     </SafeAreaView>
+
+
+    // <NavigationContainer>
+    //     <Stack.Navigator>
+    //       <Stack.Screen name="Screen1" component={Screen1_e} />
+    //       <Stack.Screen name="Screen2_a" component={Screen2_a} />
+    //     </Stack.Navigator>
+    // </NavigationContainer>
 
   );
 }

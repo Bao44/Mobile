@@ -10,14 +10,18 @@ import {
 import React, { useState } from "react";
 
 const Tiki_Ok = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
+  const [price, setPrice] = useState(141.8);
 
   function inCrease() {
     setCount(count + 1);
+    setPrice(price + 141.8);
   }
   function reduce() {
     setCount(count - 1);
+    setPrice(price - 141.8);
   }
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.header}>
@@ -32,7 +36,7 @@ const Tiki_Ok = () => {
                 Cung cấp bởi Tiki Trading
               </Text>
               <Text style={{ fontSize: 22, fontWeight: "bold", color: "red" }}>
-                141.800 đ
+                {price.toFixed(3)} đ
               </Text>
               <Text style={styles.textLine}>141.000 đ</Text>
               <View>
@@ -81,6 +85,59 @@ const Tiki_Ok = () => {
             </TouchableOpacity>
           </View>
         </View>
+      </View>
+
+      <View
+        style={{ backgroundColor: "white", marginTop: 20, paddingVertical: 30 }}
+      >
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
+          <Text style={{ fontWeight: "bold" }}>
+            Bạn có phiếu quà tặng Tiki/Got it/Urbox?
+          </Text>
+          <TouchableOpacity>
+            <Text style={{ fontWeight: "bold", color: "blue" }}>
+              Nhập tại đây?
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <View
+        style={{ backgroundColor: "white", marginTop: 20, paddingVertical: 20 }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingHorizontal: 18,
+          }}
+        >
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>Tạm tính</Text>
+
+          <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
+            {price.toFixed(3)} đ
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.bottomView}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginBottom: 20,
+          }}
+        >
+          <Text style={{ fontSize: 24, fontWeight: "bold", color: "gray" }}>
+            Thành tiền
+          </Text>
+          <Text style={{ fontSize: 24, fontWeight: "bold", color: "red" }}>
+            {price.toFixed(3)} đ
+          </Text>
+        </View>
+        <TouchableOpacity style={styles.buttonFooter}>
+          <Text style={styles.textButtonFooter}>TIẾN HÀNH ĐẶT HÀNG</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -146,5 +203,24 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     paddingTop: 15,
+  },
+  bottomView: {
+    position: "absolute",
+    bottom: 0, // Dính sát phần dưới cùng của màn hình
+    left: 0,
+    right: 0,
+    backgroundColor: "white",
+    paddingVertical: 20,
+    paddingHorizontal: 30,
+  },
+  buttonFooter: {
+    backgroundColor: "#E53935",
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  textButtonFooter: {
+    color: "white",
+    fontSize: 22,
+    fontWeight: "bold",
   },
 });
