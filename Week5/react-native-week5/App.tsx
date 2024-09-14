@@ -4,7 +4,6 @@ import Screen01 from './src/Screen01';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Screen02 from './src/Screen02';
-import Screen03 from './src/Screen03';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,8 +12,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Screen01" options={{headerShown: false}} component={Screen01} />
-        <Stack.Screen name="Screen02" component={Screen02} />
-        <Stack.Screen name="Screen03" component={Screen03} />
+        <Stack.Screen name="Screen02" options={{headerShown: false}} component={Screen02} />
       </Stack.Navigator>
     </NavigationContainer>
   );
