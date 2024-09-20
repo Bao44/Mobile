@@ -11,10 +11,10 @@ import { useNavigation } from "@react-navigation/native";
 
 const Screen02 = ({ navigation }) => {
   const images = {
-    blue: require("../assets/vs_blue.png"),
-    red: require("../assets/vs_red.png"),
-    black: require("../assets/vs_black.png"),
-    silver: require("../assets/vs_silver.png"),
+    blue: require("../../assets/vs_blue.png"),
+    red: require("../../assets/vs_red.png"),
+    black: require("../../assets/vs_black.png"),
+    silver: require("../../assets/vs_silver.png"),
   };
 
   const [color, setColor] = useState("blue");

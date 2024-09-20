@@ -17,10 +17,10 @@ const Screen01 = ({ navigation }) => {
   const { selectedColor } = router.params || { selectedColor: "blue" }; // Lấy giá trị màu hoặc mặc định là màu xanh
 
   const images = {
-    blue: require("../assets/vs_blue.png"),
-    red: require("../assets/vs_red.png"),
-    black: require("../assets/vs_black.png"),
-    silver: require("../assets/vs_silver.png"),
+    blue: require("../../assets/vs_blue.png"),
+    red: require("../../assets/vs_red.png"),
+    black: require("../../assets/vs_black.png"),
+    silver: require("../../assets/vs_silver.png"),
   };
 
   return (
@@ -44,23 +44,23 @@ const Screen01 = ({ navigation }) => {
           }}
         >
           <Image
-            source={require("../assets/star.png")}
+            source={require("../../assets/star.png")}
             style={{ width: 40, height: 40 }}
           />
           <Image
-            source={require("../assets/star.png")}
+            source={require("../../assets/star.png")}
             style={{ width: 40, height: 40 }}
           />
           <Image
-            source={require("../assets/star.png")}
+            source={require("../../assets/star.png")}
             style={{ width: 40, height: 40 }}
           />
           <Image
-            source={require("../assets/star.png")}
+            source={require("../../assets/star.png")}
             style={{ width: 40, height: 40 }}
           />
           <Image
-            source={require("../assets/star.png")}
+            source={require("../../assets/star.png")}
             style={{ width: 40, height: 40 }}
           />
         </View>
