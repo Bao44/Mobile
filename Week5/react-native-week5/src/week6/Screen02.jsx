@@ -1,5 +1,6 @@
 import {
   Button,
+  FlatList,
   Image,
   ScrollView,
   StyleSheet,
@@ -11,6 +12,59 @@ import React from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const Screen02 = ({ navigation }) => {
+  const data = [
+    {
+      image: require("../../assets/imagesWeek6/bike_blue_small.png"),
+      name: "Pinarello",
+      price: 1800,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_DrarkRed.png"),
+      name: "Pina Mountai",
+      price: 1700,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_purple.png"),
+      name: "Pina Bike",
+      price: 1500,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_red.png"),
+      name: "Pinarello",
+      price: 1900,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_purple.png"),
+      name: "Pinarello",
+      price: 2700,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_DrarkRed.png"),
+      name: "Pinarello",
+      price: 1350,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_purple.png"),
+      name: "Pina Bike",
+      price: 1500,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_red.png"),
+      name: "Pinarello",
+      price: 1900,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_purple.png"),
+      name: "Pina Bike",
+      price: 1500,
+    },
+    {
+      image: require("../../assets/imagesWeek6/bike_red.png"),
+      name: "Pinarello",
+      price: 1900,
+    },
+  ];
+
   return (
     <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
       {/* header */}
@@ -40,16 +94,38 @@ const Screen02 = ({ navigation }) => {
       </View>
 
       {/* Content */}
-      <ScrollView>
-        <View>
-            <View style={{flexDirection: 'row'}}>
-                <View style={{width: 180, height: 180, backgroundColor: 'red'}}>
-                <AntDesign name="hearto" size={24} color="black" />
-                <Image source={require("../../assets/imagesWeek6/bike_blue.png")}/>
-                </View>
-            </View>
-        </View>
-      </ScrollView>
+      <FlatList
+        data={data}
+        numColumns={2} // Hiển thị 2 sản phẩm mỗi hàng
+        contentContainerStyle={{ paddingBottom: 180 }}
+        renderItem={({ item }) => (
+          <View
+            style={{
+              flex: 1, // Đảm bảo mỗi item chiếm 1 phần đều nhau trong hàng
+              marginBottom: 10, // Khoảng cách giữa các sản phẩm
+            }}
+          >
+            <TouchableOpacity
+              style={styles.viewProduct}
+              onPress={() => navigation.navigate("Screen03", { item })}
+            >
+              <AntDesign
+                name="hearto"
+                size={24}
+                color="gray"
+                style={styles.iconHeart}
+              />
+              <Image source={item.image} style={styles.image} />
+              <View>
+                <Text style={styles.productName}>{item.name}</Text>
+                <Text style={styles.product$}>
+                  $ <Text style={styles.productPrice}>{item.price}</Text>
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
     </View>
   );
 };
@@ -61,7 +137,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom: 40,
   },
   titteHeader: {
     color: "#E94141",
@@ -71,6 +146,7 @@ const styles = StyleSheet.create({
   viewButton: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingVertical: 40,
   },
   button: {
     padding: 7,
@@ -84,5 +160,35 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  viewProduct: {
+    width: 185,
+    height: 220,
+    backgroundColor: "#F7BA8326",
+    borderRadius: 10,
+  },
+  iconHeart: {
+    position: "absolute",
+    left: 10,
+    top: 10,
+  },
+  image: {
+    alignSelf: "center",
+    marginTop: 10,
+  },
+  productName: {
+    textAlign: "center",
+    marginTop: 5,
+    fontSize: 20,
+    color: "#00000099",
+  },
+  product$: {
+    textAlign: "center",
+    fontSize: 26,
+    color: "#F7BA83",
+  },
+  productPrice: {
+    fontSize: 24,
+    color: "black",
   },
 });
