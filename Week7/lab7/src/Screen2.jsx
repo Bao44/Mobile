@@ -1,19 +1,52 @@
 import {
+  FlatList,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { getNotes, addNote, deleteNote, updateNote } from "../api.js";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Screen2 = ({ navigation, route }) => {
   const { name } = route.params;
-  const renderItem = (
+  const [notes, setNotes] = useState([]);
+
+  useFocusEffect(
+    useCallback(() => {
+      // Gọi API để lấy danh sách ghi chú mỗi khi quay lại màn hình
+      const fetchNotes = async () => {
+        try {
+          const data = await getNotes();
+          setNotes(data);
+        } catch (error) {
+          console.error("Failed to fetch notes:", error);
+        }
+      };
+      fetchNotes();
+    }, [])
+  );
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteNote(id);
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id)); // Cập nhật UI sau khi xóa thành công
+    } catch (error) {
+      console.error('Failed to delete note:', error);
+    }
+  };
+
+  const handleEdit = (note) => {
+    navigation.navigate("Screen3", { note, title: "UPDATE YOUR JOB" }); // Gửi toàn bộ đối tượng note thay vì note.id
+  };
+
+  const renderNotes = ({ item }) => (
     <View style={styles.viewNotes}>
       <View
         style={{
@@ -26,7 +59,7 @@ const Screen2 = ({ navigation, route }) => {
           <Fontisto name="checkbox-active" size={24} color="green" />
         </TouchableOpacity>
         <Text style={{ fontSize: 20, paddingHorizontal: 10 }}>
-          To check email
+          {item.description}
         </Text>
       </View>
       <View
@@ -37,10 +70,10 @@ const Screen2 = ({ navigation, route }) => {
           width: "20%",
         }}
       >
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleEdit(item.id)}>
           <FontAwesome6 name="pen-to-square" size={24} color="red" />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => handleDelete(item.id)}>
           <MaterialIcons name="delete" size={24} color="red" />
         </TouchableOpacity>
       </View>
@@ -61,72 +94,15 @@ const Screen2 = ({ navigation, route }) => {
         />
       </View>
       {/*  */}
-      <View style={styles.viewNotes}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            width: "70%",
-          }}
-        >
-          <TouchableOpacity>
-            <Fontisto name="checkbox-active" size={24} color="green" />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 20, paddingHorizontal: 10 }}>
-            To check email
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-around",
-            width: "20%",
-          }}
-        >
-          <TouchableOpacity>
-            <FontAwesome6 name="pen-to-square" size={24} color="red" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <MaterialIcons name="delete" size={24} color="red" />
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.viewNotes}>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            width: "70%",
-          }}
-        >
-          <TouchableOpacity>
-            <Fontisto name="checkbox-active" size={24} color="green" />
-          </TouchableOpacity>
-          <Text style={{ fontSize: 20, paddingHorizontal: 10 }}>
-            To check email
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-around",
-            width: "20%",
-          }}
-        >
-          <TouchableOpacity>
-            <FontAwesome6 name="pen-to-square" size={24} color="red" />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <MaterialIcons name="delete" size={24} color="red" />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <FlatList
+        data={notes}
+        keyExtractor={(item) => item.id}
+        renderItem={renderNotes}
+        
+      />
       {/*  */}
-          <Text>xin chao {name}</Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Screen3", {name})}
+        onPress={() => navigation.navigate("Screen3", { name, title: "ADD YOUR JOB" })}
         style={styles.buttonAdd}
       >
         <AntDesign
