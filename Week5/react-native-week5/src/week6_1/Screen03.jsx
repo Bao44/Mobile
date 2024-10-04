@@ -8,10 +8,9 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import json from "../../assets/data_week6_1.json";
 
-const Screen03 = ({ navigation }) => {
-  const data = json;
+const Screen03 = ({ navigation, route }) => {
+  const { data } = route.params;
   return (
     <View>
       <FlatList
@@ -25,8 +24,8 @@ const Screen03 = ({ navigation }) => {
                 source={{ uri: item.image }}
                 style={{ width: 190, height: 120 }}
               />
-              <View style={{marginLeft: 20, marginTop: 5}}>
-                <Text style={{fontSize: 16}}>{item.product}</Text>
+              <View style={{ marginLeft: 20, marginTop: 5 }}>
+                <Text style={{ fontSize: 16 }}>{item.product}</Text>
                 <View style={{ flexDirection: "row" }}>
                   <Image
                     source={require("../../assets/star.png")}
@@ -46,8 +45,9 @@ const Screen03 = ({ navigation }) => {
                   />
                   <Text>(15)</Text>
                 </View>
-                <Text>
-                  69.900 đ <Text style={{color:"gray"}}>-39%</Text>
+                <Text style={{ fontWeight: "bold" }}>
+                  69.900 đ{" "}
+                  <Text style={{ color: "gray", fontWeight: "400" }}>-39%</Text>
                 </Text>
               </View>
             </View>

@@ -53,7 +53,7 @@ const Screen01 = ({ navigation }) => {
             </View>
             <TouchableOpacity
               style={styles.viewBtn}
-              onPress={() => navigation.navigate("Screen03")}
+              onPress={() => navigation.navigate("Screen03", {data})}
             >
               <Text style={styles.textBtn}>Chat</Text>
             </TouchableOpacity>

@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Screen01 from "./src/week6_1/Screen01";
@@ -24,10 +24,31 @@ export default function App() {
         <Stack.Screen name="Screen02" options={{headerShown: false}} component={Screen02} /> */}
 
         {/* Week 6-lab1 */}
-        <Stack.Screen name="Screen01" component={Screen01} options={{headerShown: false}} />
-        <Stack.Screen name="Screen02" component={Screen02} options={{headerShown: true, title: 'Chat'}} />
-        <Stack.Screen name="Screen03" component={Screen03} options={{headerShown: true, title: ""}} />
-
+        <Stack.Screen
+          name="Screen01"
+          component={Screen01}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Screen02"
+          component={Screen02}
+          options={{
+            headerShown: true,
+            headerTitle: "Chat",
+            headerRight: () => (
+              <Button
+                onPress={() => alert("This is a button!")}
+                title="Info"
+                color="#fff"
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="Screen03"
+          component={Screen03}
+          options={{ headerShown: true, title: "" }}
+        />
 
         {/* Week 6_lab2*/}
         {/* <Stack.Screen name="Screen01" component={Screen01} options={{headerShown: false}} />
