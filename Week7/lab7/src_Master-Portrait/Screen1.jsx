@@ -2,6 +2,7 @@ import {
   Button,
   FlatList,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -32,15 +33,18 @@ const Screen1 = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <View>
-        <Image source={{ uri: item.image }} style={{width: 100, height: 100}}/>
+      <View style={styles.viewItem}>
+        <Image
+          source={{ uri: item.image }}
+          style={{ width: 100, height: 100, borderRadius: 10 }}
+        />
         <View>
-          <Text>{item.name}</Text>
-          <Text>{item.description}</Text>
-          <Text>{item.price}</Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>{item.name}</Text>
+          <Text style={{fontSize: 18, marginVertical: 5, color: '#0000008A'}}>{item.description}</Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>{item.price}</Text>
         </View>
-        <TouchableOpacity>
-          <FontAwesome5 name="plus" size={24} color="black" />
+        <TouchableOpacity style={styles.buttonPlus} onPress={() => navigation.navigate('Screen2', {item})}>
+          <FontAwesome5 name="plus" size={30} color="white" />
         </TouchableOpacity>
       </View>
     );
@@ -77,6 +81,8 @@ const Screen1 = ({ navigation }) => {
         data={product}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
+        style={{ marginBottom: 250 }}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -111,6 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 10,
+    marginBottom: 20,
   },
   buttonNav: {
     padding: 10,
@@ -123,5 +130,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  viewItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: 10,
+    backgroundColor: "#F4DDDD",
+    padding: 12,
+    borderRadius: 10,
+  },
+  buttonPlus: {
+    backgroundColor: "#F1B000",
+    padding: 7,
+    borderRadius: 5,
   },
 });
