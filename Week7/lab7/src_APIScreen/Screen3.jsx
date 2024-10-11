@@ -111,7 +111,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { addNote, updateNote } from "../api.js";
 
 const Screen3 = ({ navigation, route }) => {
-  const { name, title, note } = route.params;
+  const { title, note } = route.params;
   const [noteContent, setNoteContent] = useState(""); // Sử dụng chung cho cả thêm và cập nhật
 
   // Khi màn hình mở ra, kiểm tra nếu có note để cập nhật thì hiển thị giá trị ban đầu
@@ -138,7 +138,6 @@ const Screen3 = ({ navigation, route }) => {
       }
     }
   };
-  
 
   return (
     <View>

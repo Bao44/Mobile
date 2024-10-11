@@ -15,7 +15,6 @@ import { getNotes, addNote, deleteNote, updateNote } from "../api.js";
 import { useFocusEffect } from "@react-navigation/native";
 
 const Screen2 = ({ navigation, route }) => {
-  const { name } = route.params;
   const [notes, setNotes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -50,7 +49,7 @@ const Screen2 = ({ navigation, route }) => {
     navigation.navigate("Screen3", { note, title: "UPDATE YOUR JOB" });
   };
 
-  // Handle search by description
+
   const handleSearch = (query) => {
     setSearchQuery(query);
     if (query) {
@@ -126,7 +125,7 @@ const Screen2 = ({ navigation, route }) => {
       {/* Add Button */}
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("Screen3", { name, title: "ADD YOUR JOB" })
+          navigation.navigate("Screen3", { title: "ADD YOUR JOB" })
         }
         style={styles.buttonAdd}
       >

@@ -10,7 +10,17 @@ import React, { useState } from "react";
 import Feather from "@expo/vector-icons/Feather";
 
 const Screen1 = ({ navigation }) => {
-  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const validEmails = ['abc@gmail.com', 'a@gmail.com', 'b@gmail.com'];
+
+  const handleEmailValidation = () => {
+    if (validEmails.includes(email)) {
+      navigation.navigate("Screen2", { email });
+    } else {
+      alert("Invalid email. Please try again.");
+      setEmail(""); 
+    }
+  };
   return (
     <View>
       <Image source={require("../assets/Image 95.png")} style={styles.image}/>
@@ -19,14 +29,14 @@ const Screen1 = ({ navigation }) => {
         <Feather name="mail" size={24} color="black" style={styles.icon}/>
         <TextInput
           placeholder="Enter your name"
-          onChangeText={(newName) => setName(newName)}
-          defaultValue={name}
+          value={email}
+          onChangeText={(newEmail) => setEmail(newEmail)}
           style={styles.textInput}
         />
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Screen2", {name})}
+        onPress={handleEmailValidation}
       >
         <Text style={{ color: "white", fontSize: 20 }}>GET STARTED</Text>
         <Feather name="arrow-right" size={24} color="white" />
