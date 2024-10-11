@@ -17,14 +17,17 @@ import { useFocusEffect } from "@react-navigation/native";
 const Screen2 = ({ navigation, route }) => {
   const { name } = route.params;
   const [notes, setNotes] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+
 
   useFocusEffect(
     useCallback(() => {
-      // Gọi API để lấy danh sách ghi chú mỗi khi quay lại màn hình
       const fetchNotes = async () => {
         try {
           const data = await getNotes();
           setNotes(data);
+          setFilteredData(data); 
         } catch (error) {
           console.error("Failed to fetch notes:", error);
         }
@@ -36,14 +39,29 @@ const Screen2 = ({ navigation, route }) => {
   const handleDelete = async (id) => {
     try {
       await deleteNote(id);
-      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id)); // Cập nhật UI sau khi xóa thành công
+      setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id)); // Update notes
+      setFilteredData((prevFiltered) => prevFiltered.filter((note) => note.id !== id)); // Update filtered data
     } catch (error) {
-      console.error('Failed to delete note:', error);
+      console.error("Failed to delete note:", error);
     }
   };
 
   const handleEdit = (note) => {
-    navigation.navigate("Screen3", { note, title: "UPDATE YOUR JOB" }); // Gửi toàn bộ đối tượng note thay vì note.id
+    navigation.navigate("Screen3", { note, title: "UPDATE YOUR JOB" });
+  };
+
+  // Handle search by description
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    if (query) {
+      const filtered = notes.filter((item) => {
+        const description = item.description ? item.description.toLowerCase() : "";
+        return description.includes(query.toLowerCase());
+      });
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(notes); // Show all notes if search query is empty
+    }
   };
 
   const renderNotes = ({ item }) => (
@@ -70,7 +88,7 @@ const Screen2 = ({ navigation, route }) => {
           width: "20%",
         }}
       >
-        <TouchableOpacity onPress={() => handleEdit(item.id)}>
+        <TouchableOpacity onPress={() => handleEdit(item)}>
           <FontAwesome6 name="pen-to-square" size={24} color="red" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDelete(item.id)}>
@@ -79,8 +97,10 @@ const Screen2 = ({ navigation, route }) => {
       </View>
     </View>
   );
+
   return (
     <View>
+      {/* Search Input */}
       <View style={styles.input}>
         <AntDesign
           name="search1"
@@ -91,18 +111,23 @@ const Screen2 = ({ navigation, route }) => {
         <TextInput
           placeholder="Search"
           style={{ fontSize: 18, paddingRight: 250 }}
+          value={searchQuery}
+          onChangeText={handleSearch}
         />
       </View>
-      {/*  */}
+
+      {/* Notes List */}
       <FlatList
-        data={notes}
-        keyExtractor={(item) => item.id}
+        data={filteredData} // Show filtered notes
+        keyExtractor={(item) => item.id.toString()}
         renderItem={renderNotes}
-        
       />
-      {/*  */}
+
+      {/* Add Button */}
       <TouchableOpacity
-        onPress={() => navigation.navigate("Screen3", { name, title: "ADD YOUR JOB" })}
+        onPress={() =>
+          navigation.navigate("Screen3", { name, title: "ADD YOUR JOB" })
+        }
         style={styles.buttonAdd}
       >
         <AntDesign
