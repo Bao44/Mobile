@@ -1,4 +1,6 @@
-ex1:
+[link expo ex1][1]
+
+[1]: <https://snack.expo.dev/@quocbao44/week7-ex1?platform=android>
 
 ![Screenshot 2024-10-04 114747](https://github.com/user-attachments/assets/ffe87d5e-5197-4de4-869f-265d02d34d6a)
 ![Screenshot 2024-10-04 114842](https://github.com/user-attachments/assets/95c15ffa-9bdb-4977-b6f3-9b9e00559851)
