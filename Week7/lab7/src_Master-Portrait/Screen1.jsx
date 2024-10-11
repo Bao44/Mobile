@@ -41,7 +41,7 @@ const Screen1 = ({ navigation }) => {
         <View>
           <Text style={{fontSize: 20, fontWeight: 'bold'}}>{item.name}</Text>
           <Text style={{fontSize: 18, marginVertical: 5, color: '#0000008A'}}>{item.description}</Text>
-          <Text style={{fontSize: 20, fontWeight: 'bold'}}>{item.price}</Text>
+          <Text style={{fontSize: 20, fontWeight: 'bold'}}>${item.price}</Text>
         </View>
         <TouchableOpacity style={styles.buttonPlus} onPress={() => navigation.navigate('Screen2', {item})}>
           <FontAwesome5 name="plus" size={30} color="white" />
