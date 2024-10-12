@@ -1,5 +1,6 @@
-Các screen của week6_lab2
-Code ở week5
+[Link code expo][1]
+
+[1]: <https://snack.expo.dev/@quocbao44/week6-ex2>
 
 ![Screenshot 2024-09-20 222211](https://github.com/user-attachments/assets/fe959dc0-3c74-4de3-9778-b70971782cc5)
 ![Screenshot 2024-09-20 222216](https://github.com/user-attachments/assets/ad95608d-a08c-4a5f-9b5a-c3317e5019ba)
