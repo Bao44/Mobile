@@ -15,15 +15,44 @@ import { useFocusEffect } from "@react-navigation/native";
 import Feather from "@expo/vector-icons/Feather";
 
 const Screen3 = ({ navigation }) => {
-  const [count, setCount] = useState(0);
   const [product, setProduct] = useState([]);
+  const [counts, setCounts] = useState({});
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
-  const handleAdd = () => {
-    setCount((prevCount) => prevCount + 1);
+  const handleAdd = (id) => {
+    setCounts((prevCounts) => ({
+      ...prevCounts,
+      [id]: (prevCounts[id] || 0) + 1,
+    }));
+
+    
+    setSelectedProducts((prevProducts) => {
+      const productExists = prevProducts.some((item) => item.id === id);
+      if (!productExists) {
+        const selectedProduct = product.find((item) => item.id === id);
+        return [...prevProducts, { ...selectedProduct, count: 1 }];
+      } else {
+        return prevProducts.map((item) =>
+          item.id === id ? { ...item, count: item.count + 1 } : item
+        );
+      }
+    });
   };
 
-  const handlePre = () => {
-    setCount((prevCount) => prevCount - 1);
+  const handlePre = (id) => {
+    setCounts((prevCounts) => ({
+      ...prevCounts,
+      [id]: (prevCounts[id] || 0) > 0 ? prevCounts[id] - 1 : 0,
+    }));
+
+    
+    setSelectedProducts((prevProducts) =>
+      prevProducts
+        .map((item) =>
+          item.id === id ? { ...item, count: item.count - 1 } : item
+        )
+        .filter((item) => item.count > 0)
+    );
   };
 
   useFocusEffect(
@@ -81,10 +110,10 @@ const Screen3 = ({ navigation }) => {
             <TouchableOpacity
               style={{
                 backgroundColor: "green",
-                borderRadius: 5,
-                padding: 2,
+                borderRadius: 50,
+                padding: 5,
               }}
-              onPress={handlePre}
+              onPress={() => handlePre(item.id)}
             >
               <AntDesign name="minus" size={24} color="white" />
             </TouchableOpacity>
@@ -95,15 +124,15 @@ const Screen3 = ({ navigation }) => {
                 paddingHorizontal: 20,
               }}
             >
-              {count}
+              {counts[item.id] || 0}
             </Text>
             <TouchableOpacity
               style={{
                 backgroundColor: "green",
-                borderRadius: 5,
-                padding: 2,
+                borderRadius: 50,
+                padding: 5,
               }}
-              onPress={handleAdd}
+              onPress={() => handleAdd(item.id)}
             >
               <AntDesign name="plus" size={24} color="white" />
             </TouchableOpacity>
@@ -145,7 +174,7 @@ const Screen3 = ({ navigation }) => {
           borderRadius: 10,
           marginHorizontal: 20,
         }}
-        onPress={() => navigation.navigate("Screen4")}
+        onPress={() => navigation.navigate("Screen4", { selectedProducts })}
       >
         <Text style={{ textAlign: "center", fontSize: 20, color: "white" }}>
           GO TO CART

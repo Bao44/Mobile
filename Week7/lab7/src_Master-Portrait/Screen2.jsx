@@ -26,6 +26,8 @@ const Screen2 = ({ navigation, route }) => {
     }
   };
 
+  
+
   return (
     <View style={{ padding: 20 }}>
       <Image
