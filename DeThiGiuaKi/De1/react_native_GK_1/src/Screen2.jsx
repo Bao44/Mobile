@@ -18,6 +18,8 @@ import categories from "../data/categories.json";
 import smartphones from "../data/smartPhone.json";
 
 const Screen2 = ({ navigation }) => {
+  const [filterType, setFilterType] = useState("best_sales");
+
   const [showAll, setShowAll] = useState(false);
   const [showAllList, setShowAllList] = useState(false);
 
@@ -33,9 +35,19 @@ const Screen2 = ({ navigation }) => {
     ? categories.slice(0, 3)
     : categories.slice(0, categories.length);
 
-  const displayedList = showAllList
-    ? smartphones.slice(0, 4)
-    : smartphones.slice(0, smartphones.length);
+  const displayedList = smartphones.filter((item) => {
+    if (filterType === "best_sales") {
+      return true; // Hiển thị tất cả sản phẩm mặc định
+    } else if (filterType === "best_matched") {
+      return item.best_matched;
+    } else if (filterType === "popular") {
+      return item.popular;
+    }
+  });
+
+  const handleFilterChange = (type) => {
+    setFilterType(type);
+  };
 
   const renderCategories = ({ item }) => {
     return (
@@ -255,6 +267,7 @@ const Screen2 = ({ navigation }) => {
                 paddingVertical: 8,
                 borderRadius: 15,
               }}
+              onPress={() => handleFilterChange("best_sales")}
             >
               <Text style={{ color: "#00BDD6" }}>Best Sales</Text>
             </TouchableOpacity>
@@ -265,6 +278,7 @@ const Screen2 = ({ navigation }) => {
                 paddingVertical: 8,
                 borderRadius: 15,
               }}
+              onPress={() => handleFilterChange("best_matched")}
             >
               <Text style={{ color: "#00BDD6" }}>Best Matched</Text>
             </TouchableOpacity>
@@ -275,6 +289,7 @@ const Screen2 = ({ navigation }) => {
                 paddingVertical: 8,
                 borderRadius: 15,
               }}
+              onPress={() => handleFilterChange("popular")}
             >
               <Text style={{ color: "#00BDD6" }}>Popular</Text>
             </TouchableOpacity>
@@ -301,16 +316,9 @@ const Screen2 = ({ navigation }) => {
           }}
           onPress={handleToggleShowAllList}
         >
-          {showAllList && (
-            <Text style={{ fontSize: 18, textAlign: "center", color: "gray" }}>
-              See all
-            </Text>
-          )}
-          {!showAllList && (
-            <Text style={{ fontSize: 18, textAlign: "center", color: "gray" }}>
-              Hiden
-            </Text>
-          )}
+          <Text style={{ fontSize: 18, textAlign: "center", color: "gray" }}>
+            {showAllList ? "See all" : "Hiden"}
+          </Text>
         </TouchableOpacity>
         <View style={{ marginVertical: 20, alignItems: "center" }}>
           <Image
