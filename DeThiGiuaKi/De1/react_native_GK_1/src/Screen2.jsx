@@ -2,6 +2,7 @@ import {
   FlatList,
   Image,
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -18,11 +19,23 @@ import smartphones from "../data/smartPhone.json";
 
 const Screen2 = ({ navigation }) => {
   const [showAll, setShowAll] = useState(false);
+  const [showAllList, setShowAllList] = useState(false);
+
   const handleToggleShowAll = () => {
     setShowAll(!showAll);
   };
 
-  const displayed = showAll ? categories.slice(0, 3) : categories.slice(0, 6);
+  const handleToggleShowAllList = () => {
+    setShowAllList(!showAllList);
+  };
+
+  const displayed = showAll
+    ? categories.slice(0, 3)
+    : categories.slice(0, categories.length);
+
+  const displayedList = showAllList
+    ? smartphones.slice(0, 4)
+    : smartphones.slice(0, smartphones.length);
 
   const renderCategories = ({ item }) => {
     return (
@@ -61,8 +74,14 @@ const Screen2 = ({ navigation }) => {
             borderRadius: 10,
           }}
         />
-        <View>
-          <Text>{item.name}</Text>
+        <View
+          style={{ marginVertical: 15, marginRight: 70, marginVertical: 20 }}
+        >
+          <Text
+            style={{ paddingVertical: 8, fontSize: 18, fontWeight: "bold" }}
+          >
+            {item.name}
+          </Text>
           <View>
             <Image
               source={require("../assets/Data/Rating 5.png")}
@@ -75,9 +94,13 @@ const Screen2 = ({ navigation }) => {
             />
           </View>
         </View>
-        <View>
+        <View style={{ marginRight: 20, marginTop: 20, alignItems: "center" }}>
           <FontAwesome name="plus-circle" size={24} color="black" />
-          <Text>${item.price}</Text>
+          <Text
+            style={{ paddingVertical: 10, fontSize: 18, fontWeight: "bold" }}
+          >
+            ${item.price}
+          </Text>
         </View>
       </View>
     );
@@ -90,97 +113,9 @@ const Screen2 = ({ navigation }) => {
   const renderPopular = () => {};
 
   return (
-    <View style={{ paddingVertical: 30 }}>
-      {/* Header */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Pressable
-            onPress={() => navigation.navigate("Screen1")}
-            style={styles.button}
-          >
-            <AntDesign name="left" size={26} color="gray" />
-          </Pressable>
-          <Text style={{ fontSize: 24, fontWeight: "bold" }}>Electronics</Text>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Pressable>
-            <Feather name="shopping-cart" size={26} color="gray" />
-          </Pressable>
-          <AntDesign
-            name="user"
-            size={26}
-            color="black"
-            style={{
-              padding: 10,
-              backgroundColor: "#ccc",
-              borderRadius: 50,
-              marginHorizontal: 20,
-            }}
-          />
-        </View>
-      </View>
-      {/* Search */}
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: "rgba(0,0,0,0.07)",
-            marginLeft: 20,
-            marginTop: 40,
-          }}
-        >
-          <AntDesign
-            name="search1"
-            size={24}
-            color="gray"
-            style={{ paddingLeft: 10 }}
-          />
-          <TextInput
-            placeholder="Search"
-            style={{
-              paddingRight: 250,
-              paddingLeft: 10,
-              paddingVertical: 8,
-              fontSize: 18,
-            }}
-          />
-        </View>
-        <View
-          style={{
-            backgroundColor: "rgba(0,0,0,0.07)",
-            padding: 8,
-            marginHorizontal: 15,
-            marginTop: 40,
-          }}
-        >
-          <MaterialIcons name="filter-list" size={24} color="black" />
-        </View>
-      </View>
-      {/* Categories */}
-      <View style={{ marginVertical: 30, marginHorizontal: 20 }}>
+    <ScrollView style={{ paddingVertical: 30 }}>
+      <View style={{ flex: 1, marginBottom: 40 }}>
+        {/* Header */}
         <View
           style={{
             flexDirection: "row",
@@ -188,82 +123,203 @@ const Screen2 = ({ navigation }) => {
             alignItems: "center",
           }}
         >
-          <Text style={{ fontSize: 22, fontWeight: "bold" }}>Categories</Text>
-          <View>
-            {showAll && (
-              <TouchableOpacity onPress={handleToggleShowAll}>
-                <Text style={{ color: "gray", fontSize: 18 }}>See all</Text>
-              </TouchableOpacity>
-            )}
-            {!showAll && (
-              <TouchableOpacity onPress={handleToggleShowAll}>
-                <Text style={{ color: "gray", fontSize: 18 }}>Hiden</Text>
-              </TouchableOpacity>
-            )}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Pressable
+              onPress={() => navigation.navigate("Screen1")}
+              style={styles.button}
+            >
+              <AntDesign name="left" size={26} color="gray" />
+            </Pressable>
+            <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+              Electronics
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Pressable>
+              <Feather name="shopping-cart" size={26} color="gray" />
+            </Pressable>
+            <AntDesign
+              name="user"
+              size={26}
+              color="black"
+              style={{
+                padding: 10,
+                backgroundColor: "#ccc",
+                borderRadius: 50,
+                marginHorizontal: 20,
+              }}
+            />
           </View>
         </View>
-        <FlatList
-          data={displayed}
-          renderItem={renderCategories}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ marginTop: 20 }}
-        />
-      </View>
-
-      {/* List product */}
-      <View>
-        {/* Button */}
+        {/* Search */}
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-around",
-            marginVertical: 10,
+            alignItems: "center",
+            justifyContent: "space-between",
           }}
         >
-          <TouchableOpacity
+          <View
             style={{
-              backgroundColor: "rgba(0,0,0,0.05)",
-              paddingHorizontal: 20,
-              paddingVertical: 8,
-              borderRadius: 15,
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: "rgba(0,0,0,0.07)",
+              marginLeft: 20,
+              marginTop: 40,
             }}
           >
-            <Text style={{ color: "#00BDD6" }}>Best Sales</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            <AntDesign
+              name="search1"
+              size={24}
+              color="gray"
+              style={{ paddingLeft: 10 }}
+            />
+            <TextInput
+              placeholder="Search"
+              style={{
+                paddingRight: 250,
+                paddingLeft: 10,
+                paddingVertical: 8,
+                fontSize: 18,
+              }}
+            />
+          </View>
+          <View
             style={{
-              backgroundColor: "rgba(0,0,0,0.05)",
-              paddingHorizontal: 20,
-              paddingVertical: 8,
-              borderRadius: 15,
+              backgroundColor: "rgba(0,0,0,0.07)",
+              padding: 8,
+              marginHorizontal: 15,
+              marginTop: 40,
             }}
           >
-            <Text style={{ color: "#00BDD6" }}>Best Matched</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "rgba(0,0,0,0.05)",
-              paddingHorizontal: 20,
-              paddingVertical: 8,
-              borderRadius: 15,
-            }}
-          >
-            <Text style={{ color: "#00BDD6" }}>Popular</Text>
-          </TouchableOpacity>
+            <MaterialIcons name="filter-list" size={24} color="black" />
+          </View>
         </View>
-        {/* List */}
-        <FlatList
-          data={smartphones}
-          renderItem={renderSmartphones}
-          keyExtractor={(item) => item.id}
-          vertical
-          showsVerticalScrollIndicator={false}
-          style={{ marginTop: 20, marginBottom: 800 }}
-        />
+        {/* Categories */}
+        <View style={{ marginVertical: 30, marginHorizontal: 20 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ fontSize: 22, fontWeight: "bold" }}>Categories</Text>
+            <View>
+              {showAll && (
+                <TouchableOpacity onPress={handleToggleShowAll}>
+                  <Text style={{ color: "gray", fontSize: 18 }}>See all</Text>
+                </TouchableOpacity>
+              )}
+              {!showAll && (
+                <TouchableOpacity onPress={handleToggleShowAll}>
+                  <Text style={{ color: "gray", fontSize: 18 }}>Hiden</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+          <FlatList
+            data={displayed}
+            renderItem={renderCategories}
+            keyExtractor={(item) => item.id}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{ marginTop: 20 }}
+          />
+        </View>
+
+        {/* List product */}
+        <View>
+          {/* Button */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              marginVertical: 10,
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                backgroundColor: "rgba(0,0,0,0.05)",
+                paddingHorizontal: 20,
+                paddingVertical: 8,
+                borderRadius: 15,
+              }}
+            >
+              <Text style={{ color: "#00BDD6" }}>Best Sales</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "rgba(0,0,0,0.05)",
+                paddingHorizontal: 20,
+                paddingVertical: 8,
+                borderRadius: 15,
+              }}
+            >
+              <Text style={{ color: "#00BDD6" }}>Best Matched</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "rgba(0,0,0,0.05)",
+                paddingHorizontal: 20,
+                paddingVertical: 8,
+                borderRadius: 15,
+              }}
+            >
+              <Text style={{ color: "#00BDD6" }}>Popular</Text>
+            </TouchableOpacity>
+          </View>
+          {/* List */}
+          <FlatList
+            data={displayedList}
+            renderItem={renderSmartphones}
+            keyExtractor={(item) => item.id}
+            vertical
+            showsVerticalScrollIndicator={false}
+            style={{ marginTop: 20 }}
+          />
+        </View>
+        {/* Button */}
+        <TouchableOpacity
+          style={{
+            backgroundColor: "rgba(0,0,0,0.07)",
+            paddingVertical: 10,
+            paddingHorizontal: 20,
+            borderRadius: 10,
+            marginHorizontal: 20,
+            marginTop: 20,
+          }}
+          onPress={handleToggleShowAllList}
+        >
+          {showAllList && (
+            <Text style={{ fontSize: 18, textAlign: "center", color: "gray" }}>
+              See all
+            </Text>
+          )}
+          {!showAllList && (
+            <Text style={{ fontSize: 18, textAlign: "center", color: "gray" }}>
+              Hiden
+            </Text>
+          )}
+        </TouchableOpacity>
+        <View style={{ marginVertical: 20, alignItems: "center" }}>
+          <Image
+            source={require("../assets/Data/banner.png")}
+            style={{ width: 400, height: 150, borderRadius: 10 }}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

@@ -30,7 +30,8 @@
     "image": "https://picsum.photos/200",
     "best_matched": false,
     "popular": false
-  },
+  }
+  ,
   {
     "id": 5,
     "name": "Smartphone 5",
