@@ -12,7 +12,9 @@ import React, { useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Feather from "@expo/vector-icons/Feather";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import categories from "../data/categories.json";
+import smartphones from "../data/smartPhone.json";
 
 const Screen2 = ({ navigation }) => {
   const [showAll, setShowAll] = useState(false);
@@ -35,6 +37,49 @@ const Screen2 = ({ navigation }) => {
           }}
         />
       </TouchableOpacity>
+    );
+  };
+
+  const renderSmartphones = ({ item }) => {
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginBottom: 20,
+          borderWidth: 1,
+          borderColor: "#ccc",
+          marginHorizontal: 27,
+          borderRadius: 10,
+        }}
+      >
+        <Image
+          source={{ uri: item.image }}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 10,
+          }}
+        />
+        <View>
+          <Text>{item.name}</Text>
+          <View>
+            <Image
+              source={require("../assets/Data/Rating 5.png")}
+              style={{
+                width: 20,
+                height: 20,
+                borderRadius: 10,
+                marginHorizontal: 10,
+              }}
+            />
+          </View>
+        </View>
+        <View>
+          <FontAwesome name="plus-circle" size={24} color="black" />
+          <Text>${item.price}</Text>
+        </View>
+      </View>
     );
   };
 
@@ -185,7 +230,7 @@ const Screen2 = ({ navigation }) => {
               borderRadius: 15,
             }}
           >
-            <Text style={{color: '#00BDD6'}}>Best Sales</Text>
+            <Text style={{ color: "#00BDD6" }}>Best Sales</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -195,7 +240,7 @@ const Screen2 = ({ navigation }) => {
               borderRadius: 15,
             }}
           >
-            <Text style={{color: '#00BDD6'}}>Best Matched</Text>
+            <Text style={{ color: "#00BDD6" }}>Best Matched</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -205,10 +250,18 @@ const Screen2 = ({ navigation }) => {
               borderRadius: 15,
             }}
           >
-            <Text style={{color: '#00BDD6'}}>Popular</Text>
+            <Text style={{ color: "#00BDD6" }}>Popular</Text>
           </TouchableOpacity>
         </View>
         {/* List */}
+        <FlatList
+          data={smartphones}
+          renderItem={renderSmartphones}
+          keyExtractor={(item) => item.id}
+          vertical
+          showsVerticalScrollIndicator={false}
+          style={{ marginTop: 20, marginBottom: 800 }}
+        />
       </View>
     </View>
   );

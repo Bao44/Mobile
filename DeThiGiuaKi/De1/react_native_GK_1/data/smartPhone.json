@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Smartphone 1",
+    "price": 899,
+    "image": "https://picsum.photos/200",
+    "best_matched": true,
+    "popular": true
+  },
+  {
+    "id": 2,
+    "name": "Smartphone 2",
+    "price": 999,
+    "image": "https://picsum.photos/200",
+    "best_matched": false,
+    "popular": true
+  },
+  {
+    "id": 3,
+    "name": "Smartphone 3",
+    "price": 1099,
+    "image": "https://picsum.photos/200",
+    "best_matched": true,
+    "popular": false
+  },
+  {
+    "id": 4,
+    "name": "Smartphone 4",
+    "price": 1199,
+    "image": "https://picsum.photos/200",
+    "best_matched": false,
+    "popular": false
+  },
+  {
+    "id": 5,
+    "name": "Smartphone 5",
+    "price": 1299,
+    "image": "https://picsum.photos/200",
+    "best_matched": true,
+    "popular": true
+  },
+  {
+    "id": 6,
+    "name": "Smartphone 6",
+    "price": 1399,
+    "image": "https://picsum.photos/200",
+    "best_matched": false,
+    "popular": false
+  },
+  {
+    "id": 7,
+    "name": "Smartphone 7",
+    "price": 1499,
+    "image": "https://picsum.photos/200",
+    "best_matched": true,
+    "popular": true
+  },
+  {
+    "id": 8,
+    "name": "Smartphone 8",
+    "price": 1599,
+    "image": "https://picsum.photos/200",
+    "best_matched": false,
+    "popular": false
+  },
+  {
+    "id": 9,
+    "name": "Smartphone 9",
+    "price": 1699,
+    "image": "https://picsum.photos/200",
+    "best_matched": true,
+    "popular": true
+  },
+  {
+    "id": 10,
+    "name": "Smartphone 10",
+    "price": 1799,
+    "image": "https://picsum.photos/200",
+    "best_matched": false,
+    "popular": false
+  }
+]
