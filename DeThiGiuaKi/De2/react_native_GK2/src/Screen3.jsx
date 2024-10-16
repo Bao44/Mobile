@@ -6,12 +6,28 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import users from "../json/users.json";
 
-const Screen3 = () => {
+const Screen3 = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const validEmail = users.map((user) => user.email);
+  const validPassword = users.map((user) => user.password);
+
+  const handleValidation = () => {
+    if (validEmail.includes(email) && validPassword.includes(password)) {
+      navigation.navigate("Screen4");
+    } else {
+      alert("Invalid email or password");
+      setEmail("");
+      setPassword("");
+    }
+  };
+
   return (
     <View style={{ paddingVertical: 40 }}>
       <Image
@@ -30,8 +46,8 @@ const Screen3 = () => {
           />
           <TextInput
             placeholder="Enter your email address"
-            // value={email}
-            // onChangeText={(newEmail) => setEmail(newEmail)}
+            value={email}
+            onChangeText={(newEmail) => setEmail(newEmail)}
             style={{ paddingRight: 180, paddingLeft: 5 }}
           />
         </View>
@@ -45,14 +61,14 @@ const Screen3 = () => {
           />
           <TextInput
             placeholder="Enter your password"
-            // value={password}
-            // onChangeText={(newPassword) => setPassword(newPassword)}
+            value={password}
+            onChangeText={(newPassword) => setPassword(newPassword)}
             style={{ paddingRight: 180, paddingLeft: 5 }}
           />
           <MaterialCommunityIcons name="eye-outline" size={24} color="gray" />
         </View>
       </View>
-      <TouchableOpacity style={styles.buttonLogin}>
+      <TouchableOpacity style={styles.buttonLogin} onPress={handleValidation}>
         <Text style={styles.textButton}>Login</Text>
       </TouchableOpacity>
     </View>
