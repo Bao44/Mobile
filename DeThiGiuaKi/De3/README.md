@@ -1,0 +1,1 @@
+Demo bài kiểm tra giữa kì
