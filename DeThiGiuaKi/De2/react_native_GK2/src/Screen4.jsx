@@ -14,6 +14,12 @@ import productsData from "../productsData";
 const Screen4 = ({ navigation }) => {
   const [selectedProduct, setSelectedProduct] = useState(productsData[0]);
 
+  const [selectedSize, setSelectedSize] = useState(null); // State để lưu size được chọn
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size); // Cập nhật size khi được nhấn
+  };
+
   return (
     <ScrollView style={{ paddingVertical: 40, paddingHorizontal: 20 }}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -65,7 +71,28 @@ const Screen4 = ({ navigation }) => {
       </View>
       {/* Size */}
       <View>
-        
+        <Text style={[styles.textDescription, { fontSize: 24 }]}>Size</Text>
+        <View style={styles.viewSize}>
+          {["XS", "S", "M", "L", "XL"].map((size) => (
+            <TouchableOpacity
+              key={size}
+              style={[
+                styles.sizeBox,
+                selectedSize === size && styles.selectedSizeBox, // Đổi màu khi size được chọn
+              ]}
+              onPress={() => handleSizeSelect(size)}
+            >
+              <Text
+                style={[
+                  styles.textSize,
+                  selectedSize === size && styles.selectedTextSize, // Đổi màu văn bản khi được chọn
+                ]}
+              >
+                {size}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
@@ -141,7 +168,7 @@ const styles = StyleSheet.create({
   textDescription: {
     fontSize: 18,
     color: "gray",
-    marginVertical: 10
+    marginVertical: 5,
   },
   viewRating: {
     flexDirection: "row",
@@ -152,5 +179,35 @@ const styles = StyleSheet.create({
     color: "#585858",
     fontWeight: "bold",
     marginLeft: 10,
+  },
+  textDescription: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#696969",
+    marginVertical: 10,
+  },
+  viewSize: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 10,
+  },
+  sizeBox: {
+    padding: 10,
+    borderRadius: 5,
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 60,
+  },
+  selectedSizeBox: {
+    backgroundColor: "#00BDD6", // Màu nền khi size được chọn
+  },
+  textSize: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+  },
+  selectedTextSize: {
+    color: "white", // Màu văn bản khi size được chọn
   },
 });
