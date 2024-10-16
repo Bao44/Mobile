@@ -2,6 +2,12 @@
 
 Hãy chọn sang Android và chọn Pixel 8 Pro
 
+Bạn có thể đăng ký tài khoản mới hoặc đăng nhập với email và password sau:
+
+Email: teo@gmail.com || ty@gmail.com || bao@gmail.com
+
+Password: 123
+
 [1]: <https://snack.expo.dev/@quocbao44/936c3d>
 
 ![Screenshot 2024-10-16 213817](https://github.com/user-attachments/assets/4c808ebb-4e56-4f86-acb2-d4414d16a83a)
