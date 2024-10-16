@@ -6,12 +6,27 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import addUser from "../crud.js";
 
 const Screen2 = ({ navigation }) => {
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = () => {
+    if (userName === "" || email === "" || password === "") {
+      alert("Please fill all the fields");
+    } else {
+      addUser({ newName: userName, newEmail: email, newPass: password });
+      navigation.navigate("Screen3");
+      console.log(userName, email, password);
+    }
+  };
+
   return (
     <View>
       <View style={{ marginTop: 80 }}>
@@ -32,8 +47,8 @@ const Screen2 = ({ navigation }) => {
           />
           <TextInput
             placeholder="Enter your user name"
-            // value={userName}
-            // onChangeText={(newUserName) => setUserName(newUserName)}
+            value={userName}
+            onChangeText={(newUserName) => setUserName(newUserName)}
             style={{ paddingRight: 180, paddingLeft: 5 }}
           />
         </View>
@@ -46,8 +61,8 @@ const Screen2 = ({ navigation }) => {
           />
           <TextInput
             placeholder="Enter your email address"
-            // value={email}
-            // onChangeText={(newEmail) => setEmail(newEmail)}
+            value={email}
+            onChangeText={(newEmail) => setEmail(newEmail)}
             style={{ paddingRight: 180, paddingLeft: 5 }}
           />
         </View>
@@ -60,8 +75,8 @@ const Screen2 = ({ navigation }) => {
           />
           <TextInput
             placeholder="Enter your password"
-            // value={password}
-            // onChangeText={(newPassword) => setPassword(newPassword)}
+            value={password}
+            onChangeText={(newPassword) => setPassword(newPassword)}
             style={{ paddingRight: 180, paddingLeft: 5 }}
           />
           <MaterialCommunityIcons name="eye-outline" size={24} color="gray" />
@@ -73,10 +88,7 @@ const Screen2 = ({ navigation }) => {
           <Text style={{ color: "blue" }}> Terms & Conditions</Text>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.buttonSignUp}
-        onPress={() => navigation.navigate("Screen3")}
-      >
+      <TouchableOpacity style={styles.buttonSignUp} onPress={handleSignUp}>
         <Text style={styles.textButton}>Continue</Text>
       </TouchableOpacity>
     </View>

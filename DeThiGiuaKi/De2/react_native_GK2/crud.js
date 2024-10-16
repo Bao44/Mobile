@@ -1,6 +1,6 @@
-import users from "./users.json";
+import users from "./json/users.json";
 
-function addUser(newName, newEmail, newPass) {
+function addUser({newName, newEmail, newPass}) {
     const newId = (users.length + 1).toString();
     const newData = {
         name: newName,
