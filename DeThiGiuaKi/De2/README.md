@@ -8,7 +8,7 @@ Email: teo@gmail.com || ty@gmail.com || bao@gmail.com
 
 Password: 123
 
-[1]: <https://snack.expo.dev/@quocbao44/936c3d>
+[1]: <https://snack.expo.dev/@quocbao44/gk2>
 
 ![Screenshot 2024-10-16 213817](https://github.com/user-attachments/assets/4c808ebb-4e56-4f86-acb2-d4414d16a83a)
 ![Screenshot 2024-10-16 213823](https://github.com/user-attachments/assets/b0b1785e-f5d5-4e04-950c-445344be2c83)
