@@ -9,11 +9,10 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import productsData from "../productsData";
 
 const Screen4 = ({ navigation }) => {
-  const [selectedImage, setSelectedImage] = useState(
-    require("../assets/Data/cake.png")
-  );
+  const [selectedProduct, setSelectedProduct] = useState(productsData[0]);
 
   return (
     <ScrollView style={{ paddingVertical: 40, paddingHorizontal: 20 }}>
@@ -29,39 +28,44 @@ const Screen4 = ({ navigation }) => {
       {/* Images */}
       <View>
         <View style={styles.viewImageCenter}>
-          <Image source={selectedImage} style={styles.imageCenter} />
+          <Image source={selectedProduct.image} style={styles.imageCenter} />
         </View>
         {/* View row images */}
         <View style={styles.rowImages}>
-          <TouchableOpacity
-            onPress={() => setSelectedImage(require("../assets/Data/cake.png"))}
-            style={styles.viewImageRow}
-          >
-            <Image source={require("../assets/Data/cake.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setSelectedImage(require("../assets/Data/cam.png"))}
-            style={styles.viewImageRow}
-          >
-            <Image source={require("../assets/Data/cam.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              setSelectedImage(require("../assets/Data/donut.png"))
-            }
-            style={styles.viewImageRow}
-          >
-            <Image source={require("../assets/Data/donut.png")} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              setSelectedImage(require("../assets/Data/cherry.png"))
-            }
-            style={styles.viewImageRow}
-          >
-            <Image source={require("../assets/Data/cherry.png")} />
-          </TouchableOpacity>
+          {productsData.map((product) => (
+            <TouchableOpacity
+              key={product.id}
+              style={styles.viewImageRow}
+              onPress={() => setSelectedProduct(product)} // Update the selected product
+            >
+              <Image source={product.image} />
+            </TouchableOpacity>
+          ))}
         </View>
+      </View>
+      {/* Price */}
+      <View style={styles.viewPrice}>
+        <Text style={styles.price}>${selectedProduct.price}</Text>
+        <View style={styles.viewBuyPrice}>
+          <Text style={styles.textBuy}>Buy 1 get 1</Text>
+        </View>
+      </View>
+      {/* Name product */}
+      <View style={styles.viewNameProduct}>
+        <View>
+          <Text style={styles.textName}>{selectedProduct.name}</Text>
+          <Text style={styles.textDescription}>
+            Occaecat est desrrunt tempor offici
+          </Text>
+        </View>
+        <View style={styles.viewRating}>
+          <Image source={require("../assets/Data/Rating 3.png")} />
+          <Text style={styles.textRating}>{selectedProduct.rating}</Text>
+        </View>
+      </View>
+      {/* Size */}
+      <View>
+        
       </View>
     </ScrollView>
   );
@@ -95,10 +99,58 @@ const styles = StyleSheet.create({
   rowImages: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginBottom: 30,
   },
   viewImageRow: {
     backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 10,
     padding: 10,
+  },
+  viewPrice: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "65%",
+    justifyContent: "space-between",
+  },
+  price: {
+    fontSize: 40,
+    fontWeight: "bold",
+    color: "#00BDD6",
+  },
+  viewBuyPrice: {
+    backgroundColor: "#FFDAB9",
+    paddingVertical: 5,
+    paddingHorizontal: 12,
+    borderRadius: 15,
+  },
+  textBuy: {
+    fontSize: 16,
+    color: "#FF6347",
+  },
+  viewNameProduct: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  textName: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: "#585858",
+  },
+  textDescription: {
+    fontSize: 18,
+    color: "gray",
+    marginVertical: 10
+  },
+  viewRating: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  textRating: {
+    fontSize: 20,
+    color: "#585858",
+    fontWeight: "bold",
+    marginLeft: 10,
   },
 });
