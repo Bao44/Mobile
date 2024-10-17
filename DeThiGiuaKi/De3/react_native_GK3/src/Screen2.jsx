@@ -1,4 +1,6 @@
 import {
+  FlatList,
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -8,12 +10,35 @@ import {
 import React, { useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { data, getAllVegetables } from "../data/data";
 
 const Screen2 = ({ navigation }) => {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState("Vegetable");
+  const [filteredData, setFilteredData] = useState(getAllVegetables);
+  const [visibleCount, setVisibleCount] = useState(6); // Ban đầu hiển thị 6 sản phẩm
 
   const handleSelect = (option) => {
     setSelected(option); // cập nhật giá trị selected
+    filterData(option); // lọc dữ liệu
+  };
+
+  const filterData = (category) => {
+    const filtered = data.filter((item) => item.type === category);
+    setFilteredData(filtered);
+    setVisibleCount(6); // Reset lại số lượng hiển thị
+  };
+
+  const handleSeeAll = () => {
+    setVisibleCount(filteredData.length); // Hiển thị tất cả sản phẩm
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity style={styles.viewItem}>
+        <Image source={item.image} style={{ width: 200, height: 200 }} />
+        <Text style={styles.textItem}>{item.name}</Text>
+      </TouchableOpacity>
+    );
   };
 
   return (
@@ -38,7 +63,7 @@ const Screen2 = ({ navigation }) => {
       </View>
       {/* Options */}
       <View style={styles.viewOptions}>
-        {["Vegetable", "Seafood", "Meat"].map((option) => (
+        {["Vegetable", "Seafood", "Drinks"].map((option) => (
           <TouchableOpacity
             key={option}
             style={[
@@ -53,13 +78,35 @@ const Screen2 = ({ navigation }) => {
                 selected === option && styles.textSelectedOption,
               ]}
             >
-              Vegetable
+              {option}
             </Text>
           </TouchableOpacity>
         ))}
       </View>
       {/* Text */}
-      <View></View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginHorizontal: 20,
+        }}
+      >
+        <Text style={{ fontSize: 26, color: "#00CD66" }}>
+          Order your favorite!
+        </Text>
+        <TouchableOpacity onPress={handleSeeAll}>
+          <Text style={{ fontSize: 26, color: "orange" }}>See all</Text>
+        </TouchableOpacity>
+      </View>
+      {/* List item */}
+      <FlatList
+        data={filteredData.slice(0, visibleCount)}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={2}
+        contentContainerStyle={{ paddingHorizontal: 5}}
+        style={{ marginBottom: 240 }}
+      />
     </View>
   );
 };
@@ -110,5 +157,16 @@ const styles = StyleSheet.create({
   },
   textSelectedOption: {
     color: "white",
+  },
+  viewItem: {
+    margin: 10,
+    backgroundColor: "white",
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  textItem: {
+    fontSize: 20,
+    fontWeight: "bold",
+    padding: 10,
   },
 });
