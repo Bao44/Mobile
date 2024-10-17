@@ -34,7 +34,10 @@ const Screen2 = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <TouchableOpacity style={styles.viewItem}>
+      <TouchableOpacity
+        style={styles.viewItem}
+        onPress={() => navigation.navigate("Screen3")}
+      >
         <Image source={item.image} style={{ width: 200, height: 200 }} />
         <Text style={styles.textItem}>{item.name}</Text>
       </TouchableOpacity>
@@ -50,7 +53,12 @@ const Screen2 = ({ navigation }) => {
         >
           <AntDesign name="left" size={26} color="gray" />
         </TouchableOpacity>
-        <FontAwesome5 name="shopping-cart" size={28} color="#00CD66" />
+        <FontAwesome5
+          name="shopping-cart"
+          size={28}
+          color="#00CD66"
+          onPress={() => navigation.navigate("Screen3")}
+        />
       </View>
       {/* Search */}
       <View>
@@ -104,7 +112,7 @@ const Screen2 = ({ navigation }) => {
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2}
-        contentContainerStyle={{ paddingHorizontal: 5}}
+        contentContainerStyle={{ paddingHorizontal: 5 }}
         style={{ marginBottom: 240 }}
       />
     </View>
