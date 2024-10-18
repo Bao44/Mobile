@@ -11,16 +11,31 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { data } from "../data/data";
 
 const Screen3 = ({ navigation }) => {
-  const [count, setCount] = useState(0);
+  const [quantities, setQuantities] = useState(
+    data.reduce((acc, item) => {
+      acc[item.id] = 0;
+      return acc;
+    }, {})
+  );
 
-  const handleIncrease = () => {
-    setCount(count + 1);
+  const handleIncrease = (id) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: prevQuantities[id] + 1,
+    }));
   };
 
-  const handleDecrease = () => {
-    if (count > 0) {
-      setCount(count - 1);
-    }
+  const handleDecrease = (id) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: prevQuantities[id] > 0 ? prevQuantities[id] - 1 : 0,
+    }));
+  };
+
+  const calculateTotal = () => {
+    return data.reduce((total, item) => {
+      return total + item.price * quantities[item.id];
+    }, 0);
   };
 
   const renderItem = ({ item }) => {
@@ -51,7 +66,10 @@ const Screen3 = ({ navigation }) => {
             marginRight: 10,
           }}
         >
-          <TouchableOpacity style={styles.buttonPlusMinus}>
+          <TouchableOpacity
+            style={styles.buttonPlusMinus}
+            onPress={() => handleDecrease(item.id)}
+          >
             <AntDesign name="minus" size={24} color="white" />
           </TouchableOpacity>
           <Text
@@ -62,9 +80,12 @@ const Screen3 = ({ navigation }) => {
               fontWeight: "bold",
             }}
           >
-            {count}
+            {quantities[item.id]}
           </Text>
-          <TouchableOpacity style={styles.buttonPlusMinus}>
+          <TouchableOpacity
+            style={styles.buttonPlusMinus}
+            onPress={() => handleIncrease(item.id)}
+          >
             <AntDesign name="plus" size={24} color="white" />
           </TouchableOpacity>
         </View>
@@ -95,11 +116,11 @@ const Screen3 = ({ navigation }) => {
             marginVertical: 15,
           }}
         >
-          <Text style={{ fontSize: 24, fontWeight: "bold", color: "#9932CC" }}>
+          <Text style={{ fontSize: 30, fontWeight: "bold", color: "#9932CC" }}>
             Total:{" "}
           </Text>
-          <Text style={{ fontSize: 24, fontWeight: "bold", color: "#9932CC" }}>
-            $ 00.00
+          <Text style={{ fontSize: 30, fontWeight: "bold", color: "#9932CC" }}>
+            $ {calculateTotal().toFixed(2)}
           </Text>
         </View>
         <TouchableOpacity
