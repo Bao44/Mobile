@@ -3,4 +3,5 @@
 
 ## [Link expo Redux][1]
 
-## [Link expo Redux Todo App][2]
+## [Link expo Redux Todo App][2] 
+Bạn hãy nhập a hoặc b hoặc c để vào màn hình
