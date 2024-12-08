@@ -12,4 +12,4 @@
 
 Sử dụng `Expo Go` để thực hiện
 
-#### Link bài làm
+### Link bài làm
