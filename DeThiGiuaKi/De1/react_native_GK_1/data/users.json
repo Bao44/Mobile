@@ -6,27 +6,27 @@
   },
   {
     "id": 2,
-    "email": "b@gmail.com",
+    "email": "bao@gmail.com",
     "password": "123456"
   },
   {
     "id": 3,
-    "email": "c@gmail.com",
+    "email": "teo@gmail.com",
     "password": "123456"
   },
   {
     "id": 4,
-    "email": "d@gmail.com",
+    "email": "ty@gmail.com",
     "password": "123456"
   },
   {
     "id": 5,
-    "email": "e@gmail.com",
+    "email": "heo@gmail.com",
     "password": "123456"
   },
   {
     "id": 6,
-    "email": "f@gmail.com",
+    "email": "ga@gmail.com",
     "password": "123456"
   }
 ]
