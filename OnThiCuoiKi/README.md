@@ -13,3 +13,7 @@
 Sử dụng `Expo Go` để thực hiện
 
 ### Link bài làm
+
+[1]: <https://snack.expo.dev/@quocbao44/demo-stack-navigation>
+
+[Demo Stack Navigation][1]
