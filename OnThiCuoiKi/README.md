@@ -9,6 +9,7 @@
 - `Redux Toolkit`
 - `Axios` hoặc `Fetch API`
 - `Navigation Library`
+- `Cloudinary` upload ảnh
 
 Sử dụng `Expo Go` để thực hiện
 
